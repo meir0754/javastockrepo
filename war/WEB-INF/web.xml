@@ -8,10 +8,23 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>Javastockrepo</servlet-name>
 		<servlet-class>com.sawdayee.JavastockrepoServlet</servlet-class>
 	</servlet>
+	
 	<servlet-mapping>
 		<servlet-name>Javastockrepo</servlet-name>
 		<url-pattern>/javastockrepo</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ServletNumber2</servlet-name>
+		<servlet-class>com.sawdayee.ServletNumber2</servlet-class>
+	</servlet>
+	
+	
+	<servlet-mapping>
+		<servlet-name>ServletNumber2</servlet-name>
+		<url-pattern>/servletnumber2</url-pattern>
+	</servlet-mapping>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
