@@ -2,10 +2,15 @@ package com.sawdayee;
 
 public class Stock{
 
+	private static final int BUY = 0, SELL = 1, REMOVE = 2, HOLD = 3;
+	
 	private String symbol;
 	private float ask;
 	private float bid;	
 	private java.util.Date date;
+	private int recommendation;
+	private int stockQuentity;
+	
 	
 	public Stock(String initSymbol, float initAsk, float initBid, java.util.Date initDate) {
 		this.setSymbol(initSymbol);
@@ -60,6 +65,22 @@ public class Stock{
 	
 	public int getDateYear() {
 		return this.date.getYear();
+	}
+
+	public int getRecommendation() {
+		return this.recommendation;
+	}
+
+	public void setRecommendation(int recommendation) {
+		this.recommendation = recommendation;
+	}
+
+	public int getStockQuentity() {
+		return this.stockQuentity;
+	}
+
+	public void setStockQuentity(int stockQuentity) {
+		this.stockQuentity = stockQuentity;
 	}
 	
 }
