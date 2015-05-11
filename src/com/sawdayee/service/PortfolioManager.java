@@ -5,6 +5,7 @@ import java.util.Date;
 
 import com.sawdayee.model.Portfolio;
 import com.sawdayee.model.Stock;
+import com.sawdayee.model.Portfolio.ALGO_RECOMMENDATION;
 
 
 /**
@@ -21,30 +22,40 @@ public class PortfolioManager {
 	*/
 	public Portfolio getPortfolio() {
 		
-		Portfolio portfolio = new Portfolio ("Meir's Portfolio");
+		Portfolio portfolio = new Portfolio ("Exercise 7 portfolio");
 		Stock s1, s2, s3;
 		
 		Calendar cal1 = Calendar.getInstance();
-		cal1.set(2014, 10, 15);
+		cal1.set(2014, 11, 15);
 		Date date1 = cal1.getTime();
 		
 		Calendar cal2 = Calendar.getInstance();
-		cal2.set(2014, 10, 15);
+		cal2.set(2014, 11, 15);
 		Date date2 = cal2.getTime();
 		
 		Calendar cal3 = Calendar.getInstance();
-		cal3.set(2014, 10, 15);
+		cal3.set(2014, 11, 15);
 		Date date3 = cal3.getTime();
 		
-		s1 = new Stock("PIH", 13.1f, 12.4f, date1, 0, 0);
+		s1 = new Stock("PIH", 10.0f, 8.5f, date1, ALGO_RECOMMENDATION.BUY, 20);
+		s2 = new Stock("AAL", 30.0f, 25.5f, date2,  ALGO_RECOMMENDATION.BUY, 30);
+		s3 = new Stock("CAAS", 20.0f, 15.5f, date3,  ALGO_RECOMMENDATION.BUY, 40);
+		
 		portfolio.addStock(s1);
-		
-		s2 = new Stock("AAL", 5.78f, 5.5f, date2, 0, 0);
 		portfolio.addStock(s2);
-		
-		s3 = new Stock("CAAS", 32.2f, 31.5f, date3, 0, 0);
 		portfolio.addStock(s3);
+		
+		portfolio.updateBalance(10000f);
 	
+		portfolio.buyStock(s1, 20);		
+		portfolio.buyStock(s2, 30);		
+		portfolio.buyStock(s3, 40);
+		
+		portfolio.sellStock("AAL", -1);
+		portfolio.removeStock("CAAS");
+		
 		return portfolio;
 	}
 }
+
+

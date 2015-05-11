@@ -3,34 +3,34 @@ package com.sawdayee.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.sawdayee.model.Portfolio.ALGO_RECOMMENDATION;
+
 /**
  * Represents a stock
  * @author      Meirs
- * @version     1.0                
+ * @version     2.0                
  * @since       05-05-2015
  */
 public class Stock{
-
-	private static final int BUY = 0, SELL = 1, REMOVE = 2, HOLD = 3;
 
 	private String symbol;
 	private float ask;
 	private float bid;	
 	private Date date;
-	private int recommendation;
-	private int stockQuentity;
+	private Portfolio.ALGO_RECOMMENDATION recommendation;
+	private int stockQuantity;
 
 	/**
 	 * The class constractor
 	 * @param the stock symbol and values
 	 */
-	public Stock(String initSymbol, float initAsk, float initBid, Date initDate, int initRecommendation, int initStockQuentity) {
+	public Stock(String initSymbol, float initAsk, float initBid, Date initDate, ALGO_RECOMMENDATION initRecommendation, int initStockQuantity) {
 		this.symbol = initSymbol;
 		this.ask = initAsk;
 		this.bid = initBid;
 		this.date = initDate;
-		this.recommendation = initRecommendation;
-		this.stockQuentity = initStockQuentity;
+		this.recommendation = ALGO_RECOMMENDATION.HOLD;
+		this.stockQuantity = initStockQuantity;
 	}
 	
 	/**
@@ -43,7 +43,7 @@ public class Stock{
 		this.bid = (stock.getBid());
 		this.date = new Date (stock.getDate().getTime());	
 		this.recommendation = (stock.getRecommendation());
-		this.stockQuentity = (stock.getStockQuentity());
+		this.stockQuantity = (stock.getStockQuantity());
 	}
 
 	/**
@@ -53,8 +53,11 @@ public class Stock{
 	public String getHtmlDescription() {
 		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 		String dateStr = df.format(getDate());
-
-		return "<b>Stock symbol</b> : "+this.getSymbol()+", <b>ask</b> : "+this.getAsk()+", <b>Bid</b>: "+this.getBid()+", <b>Date</b>: " +dateStr; 
+		String str ="";
+		str += "<b>Stock symbol</b> : "+this.getSymbol()+", <b>Ask</b> : "+this.getAsk();
+		str += ", <b>Bid</b>: "+this.getBid()+", <b>Date</b>: " +dateStr;
+		str += ", <b>Quantity</b>: " + this.getStockQuantity(); 
+		return str;
 	}
 
 	public String getSymbol() {
@@ -88,20 +91,20 @@ public class Stock{
 		this.date = date;
 	}
 
-	public int getRecommendation() {
+	public ALGO_RECOMMENDATION getRecommendation() {
 		return this.recommendation;
 	}
 
-	public void setRecommendation(int recommendation) {
+	public void setRecommendation(ALGO_RECOMMENDATION recommendation) {
 		this.recommendation = recommendation;
 	}
 
-	public int getStockQuentity() {
-		return this.stockQuentity;
+	public int getStockQuantity() {
+		return this.stockQuantity;
 	}
 
-	public void setStockQuentity(int stockQuentity) {
-		this.stockQuentity = stockQuentity;
+	public void setStockQuantity(int stockQuantity) {
+		this.stockQuantity = stockQuantity;
 	}
 
 }
