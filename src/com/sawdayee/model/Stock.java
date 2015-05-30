@@ -3,15 +3,17 @@ package com.sawdayee.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.algo.model.StockInterface;
+
 import com.sawdayee.model.Portfolio.ALGO_RECOMMENDATION;
 
 /**
  * Represents a stock
  * @author      Meirs
- * @version     2.0                
- * @since       05-05-2015
+ * @version     3.0                
+ * @since       29-05-2015
  */
-public class Stock{
+public class Stock implements StockInterface{
 
 	private String symbol;
 	private float ask;
@@ -22,15 +24,14 @@ public class Stock{
 
 	/**
 	 * The class constractor
-	 * @param the stock symbol and values
 	 */
-	public Stock(String initSymbol, float initAsk, float initBid, Date initDate, ALGO_RECOMMENDATION initRecommendation, int initStockQuantity) {
-		this.symbol = initSymbol;
-		this.ask = initAsk;
-		this.bid = initBid;
-		this.date = initDate;
+	public Stock() {
+		this.symbol = null;
+		this.ask = 0;
+		this.bid = 0;
+		this.date = null;
 		this.recommendation = ALGO_RECOMMENDATION.HOLD;
-		this.stockQuantity = initStockQuantity;
+		this.stockQuantity = 0;
 	}
 	
 	/**
@@ -60,6 +61,9 @@ public class Stock{
 		return str;
 	}
 
+	
+	// Setters&Getters
+	
 	public String getSymbol() {
 		return this.symbol;
 	}
