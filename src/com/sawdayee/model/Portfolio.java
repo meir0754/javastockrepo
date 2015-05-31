@@ -62,10 +62,10 @@ public class Portfolio implements PortfolioInterface{
 	 * @param portfolio - the original portfolio
 	 */
 	public Portfolio (Portfolio portfolio) {
-		this.title = new String (portfolio.getTitle());
+		this (new String (portfolio.getTitle()));
 		this.portfolioSize = (portfolio.getPortfolioSize());
 		this.stocks = new StockInterface[MAX_PORTFOLIO_SIZE];
-		this.balance = (portfolio.getBalance());
+		this.updateBalance(portfolio.getBalance());
 		for (int i = 0; i < portfolio.portfolioSize; i++) {
 			this.stocks[i] = new Stock((Stock)portfolio.getStocks()[i]);
 		}
