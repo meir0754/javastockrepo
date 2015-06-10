@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.sawdayee.exception.BalanceException;
+import com.sawdayee.exception.PortfolioFullException;
+import com.sawdayee.exception.StockAlreadyExistsException;
+import com.sawdayee.exception.StockNotExistException;
 import com.sawdayee.model.Portfolio;
 import com.sawdayee.model.Stock;
 
@@ -21,7 +25,6 @@ import org.algo.service.DatastoreService;
 import org.algo.service.MarketService;
 import org.algo.service.PortfolioManagerInterface;
 import org.algo.service.ServiceManager;
-
 
 /**
  * Class code to demonstrate new PortfolioManager
@@ -127,21 +130,35 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	 * Add stock to portfolio 
 	 */
 	@Override
-	public void addStock(String symbol) {
+	public void addStock(String symbol) throws PortfolioException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
 
 		try {
 			StockDto stockDto = ServiceManager.marketService().getStock(symbol);
-			
+
 			//get current symbol values from nasdaq.
 			Stock stock = fromDto(stockDto);
-			
+
 			//first thing, add it to portfolio.
-			portfolio.addStock(stock);   
+			try {
+				portfolio.addStock(stock);
+			} catch (PortfolioFullException e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			} catch (StockAlreadyExistsException e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			}
 
 			//second thing, save the new stock to the database.
 			datastoreService.saveStock(toDto(portfolio.findStock(symbol)));
-			
+
 			flush(portfolio);
 		} catch (SymbolNotFoundInNasdaq e) {
 			System.out.println("Stock Not Exists: "+symbol);
@@ -155,13 +172,31 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	public void buyStock(String symbol, int quantity) throws PortfolioException{
 		try {
 			Portfolio portfolio = (Portfolio) getPortfolio();
-			
+
 			Stock stock = (Stock) portfolio.findStock(symbol);
 			if(stock == null) {
 				stock = fromDto(ServiceManager.marketService().getStock(symbol));				
 			}
-			
-			portfolio.buyStock(stock, quantity);
+			try {
+				portfolio.buyStock(stock, quantity);
+			}	catch (PortfolioFullException e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			} catch (BalanceException e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			} catch (StockAlreadyExistsException e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			} catch (Exception e) {
+				e.getMessage();
+				e.printStackTrace();
+				throw e;
+			}
+
 			flush(portfolio);
 		}catch (Exception e) {
 			System.out.println("Exception: "+e);
@@ -203,7 +238,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 		if (inStock == null) {
 			return null;
 		}
-		
+
 		Stock stock = (Stock) inStock;
 		return new StockDto(stock.getSymbol(), stock.getAsk(), stock.getBid(), 
 				stock.getDate(), stock.getStockQuantity(), stock.getRecommendation().name());
@@ -270,8 +305,8 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 		return ret;
 	}	
-	
-	
+
+
 	/**
 	 * A method that returns a new instance of Portfolio copied from another instance.
 	 * @param portfolio		Portfolio to copy.
@@ -291,14 +326,25 @@ public class PortfolioManager implements PortfolioManagerInterface {
 		portfolio.setTitle(title);
 		flush(portfolio);
 	}
-	
+
 	/**
 	 * Sell stock
 	 */
 	@Override
 	public void sellStock(String symbol, int quantity) throws PortfolioException {
 		Portfolio portfolio = (Portfolio) getPortfolio();
-		portfolio.sellStock(symbol, quantity);
+		try {
+			portfolio.sellStock(symbol, quantity);
+		} catch (StockNotExistException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} 
+
 		flush(portfolio);
 	}
 
@@ -306,18 +352,34 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	 * Remove stock
 	 */
 	@Override
-	public void removeStock(String symbol) { 
+	public void removeStock(String symbol) throws PortfolioException { 
 		Portfolio portfolio = (Portfolio) getPortfolio();
-		portfolio.removeStock(symbol);
+		try {
+			portfolio.removeStock(symbol);
+		} catch (StockNotExistException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		}
 		flush(portfolio);
 	}
 
 	/**
 	 * update portfolio balance
 	 */
-	public void updateBalance(float value) { 
+	public void updateBalance(float value) throws PortfolioException{ 
 		Portfolio portfolio = (Portfolio) getPortfolio();
-		portfolio.updateBalance(value);
+		try {
+			portfolio.updateBalance(value);
+		} catch (BalanceException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		}
 		flush(portfolio);
 	}
 
