@@ -77,7 +77,7 @@ public class Portfolio implements PortfolioInterface{
 
 	/**
 	 * Adding a new stock to the portfolio
-	 * @param stock - the stock to add to this portfolio
+	 * @param stock - the stock choosen to add to this portfolio
 	 */
 	public void addStock(Stock stock) throws PortfolioFullException, StockAlreadyExistsException, IllegalArgumentException {
 		if (stock.getSymbol() == null) {

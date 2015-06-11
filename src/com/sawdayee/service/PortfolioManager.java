@@ -306,7 +306,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 
 	/**
 	 * A method that returns a new instance of Portfolio copied from another instance.
-	 * @param portfolio		Portfolio to copy.
+	 * @param portfolio-	Portfolio to copy.
 	 * @return a new Portfolio object with the same values as the one given.
 	 */
 	public Portfolio duplicatePortfolio(Portfolio portfolio) {

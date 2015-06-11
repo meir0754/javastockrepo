@@ -4,7 +4,7 @@ import org.algo.exception.PortfolioException;
 
 @SuppressWarnings("serial")
 /**
- * Elert when you added a stock that is already exist in your portfolio
+ * Elert when you added a stock that is already exist in the portfolio
  * @author      Meirs
  * @version     1.0                
  * @since       11-06-2015         

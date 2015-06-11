@@ -4,7 +4,7 @@ import org.algo.exception.PortfolioException;
 
 @SuppressWarnings("serial")
 /**
- * Elert when there is not enough balance
+ * Elert when there is not enough balance in the portfolio
  * @author      Meirs
  * @version     1.0                
  * @since       11-06-2015         
