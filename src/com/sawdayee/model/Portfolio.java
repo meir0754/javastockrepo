@@ -121,7 +121,7 @@ public class Portfolio implements PortfolioInterface{
 	public void sellStock (String symbol, int quantity) throws StockNotExistException, BalanceException, IllegalArgumentException{
 
 		if (quantity < -1 || symbol == null) {
-			throw new IllegalArgumentException("Error: Please check your quantity or symbol");
+			throw new IllegalArgumentException("You cant sell negative quantity or check your symbol");
 		}
 		else if (getStockIndex(symbol) != -1) {
 			if (quantity > ((Stock) stocks[getStockIndex(symbol)]).getStockQuantity()) {
@@ -145,11 +145,11 @@ public class Portfolio implements PortfolioInterface{
 	 * @return indicating operation success/fail
 	 */
 	public void buyStock (Stock stock, int quantity) throws BalanceException, PortfolioFullException, StockAlreadyExistsException, IllegalArgumentException {
-		if (quantity < -1 && quantity != -1) {
-			throw new IllegalArgumentException("Stock quantity cant be nothing or negative"); 
+		if (stock == null || quantity < -1) {
+			throw new IllegalArgumentException("You cant buy negative quantity or check your symbol"); 
 		}
 		else if (getBalance() < (quantity * stock.getAsk())) {
-			throw new IllegalArgumentException("Not enough balance to complete purchase");
+			throw new IllegalArgumentException("Not enough balance to buy");
 		}
 		else if (getStockIndex(stock.getSymbol()) == -1) {
 			addStock(stock);

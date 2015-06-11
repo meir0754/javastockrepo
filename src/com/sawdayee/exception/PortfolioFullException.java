@@ -3,6 +3,12 @@ package com.sawdayee.exception;
 import org.algo.exception.PortfolioException;
 
 @SuppressWarnings("serial")
+/**
+ * Elert when the portfoio is full
+ * @author      Meirs
+ * @version     1.0                
+ * @since       11-06-2015         
+ */
 public class PortfolioFullException extends PortfolioException {
 
 	public PortfolioFullException (int maxSize) {

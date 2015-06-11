@@ -177,28 +177,25 @@ public class PortfolioManager implements PortfolioManagerInterface {
 			if(stock == null) {
 				stock = fromDto(ServiceManager.marketService().getStock(symbol));				
 			}
-			try {
-				portfolio.buyStock(stock, quantity);
-			}	catch (PortfolioFullException e) {
-				e.getMessage();
-				e.printStackTrace();
-				throw e;
-			} catch (BalanceException e) {
-				e.getMessage();
-				e.printStackTrace();
-				throw e;
-			} catch (StockAlreadyExistsException e) {
-				e.getMessage();
-				e.printStackTrace();
-				throw e;
-			} catch (Exception e) {
-				e.getMessage();
-				e.printStackTrace();
-				throw e;
-			}
-
+			portfolio.buyStock(stock, quantity);
 			flush(portfolio);
-		}catch (Exception e) {
+		} catch (PortfolioFullException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} catch (BalanceException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} catch (StockAlreadyExistsException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} catch (IllegalArgumentException e) {
+			e.getMessage();
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
 			System.out.println("Exception: "+e);
 		}
 	}

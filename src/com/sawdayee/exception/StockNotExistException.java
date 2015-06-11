@@ -3,6 +3,12 @@ package com.sawdayee.exception;
 import org.algo.exception.PortfolioException;
 
 @SuppressWarnings("serial")
+/**
+ * Elert when you try to remove or sell a stock that doesnt exist in your portfolio
+ * @author      Meirs
+ * @version     1.0                
+ * @since       11-06-2015         
+ */
 public class StockNotExistException extends PortfolioException{
 
 	public StockNotExistException (String symbol) {
