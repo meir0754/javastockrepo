@@ -127,7 +127,7 @@ public class PortfolioManager implements PortfolioManagerInterface {
 	}
 
 	/**
-	 * Add stock to portfolio 
+	 * Add stock to the portfolio 
 	 */
 	@Override
 	public void addStock(String symbol) throws PortfolioException {

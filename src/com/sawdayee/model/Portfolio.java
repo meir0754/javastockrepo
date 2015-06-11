@@ -12,7 +12,7 @@ import com.sawdayee.exception.StockNotExistException;
  * Represents a portfolio of stocks
  * @author      Meirs
  * @version     4.0                
- * @since       29-05-2015         
+ * @since       11-06-2015         
  */
 public class Portfolio implements PortfolioInterface{
 

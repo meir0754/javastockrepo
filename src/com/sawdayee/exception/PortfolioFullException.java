@@ -4,7 +4,7 @@ import org.algo.exception.PortfolioException;
 
 @SuppressWarnings("serial")
 /**
- * Elert when the portfolio is full
+ * Elerts when the portfolio is full
  * @author      Meirs
  * @version     1.0                
  * @since       11-06-2015         
